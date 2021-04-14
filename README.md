@@ -1,2 +1,2 @@
-# goit-js-hw-13-image-finder
-HW13
+# goit-js-hw-12-countries
+hw12
