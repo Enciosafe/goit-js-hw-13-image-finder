@@ -4,7 +4,7 @@ import getRefs from './refs.js'
 import cartTemplate from './galeryList.hbs';
 const refs = getRefs();
 const galleryApiService = new ApiService();
-const basicLightbox = require('basiclightbox')
+// const basicLightbox = require('basiclightbox')
 
 
     
@@ -51,6 +51,7 @@ function clearMarkup() {
 }
 
 
+import * as basicLightbox from 'basiclightbox';
 document.addEventListener('click', toModal)
 
 function toModal(e) {
