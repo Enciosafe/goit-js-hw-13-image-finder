@@ -4,6 +4,8 @@ import getRefs from './refs.js'
 import cartTemplate from './galeryList.hbs';
 const refs = getRefs();
 const galleryApiService = new ApiService();
+const basicLightbox = require('basiclightbox')
+
 
     
 refs.inputForm.addEventListener('submit', search)
@@ -18,13 +20,25 @@ function search(e) {
         clearMarkup();
         appendPicMarkup(pics);
     });
-    
-
 }
     
 function showMorePics() {
     galleryApiService.fetchOn().then(appendPicMarkup)
+    
+    const cordinates = refs.showMore.offsetTop;
+    console.log(cordinates)
+    
+    
+    
+    function scrollToBottom() {
+        window.scrollTo({
+        top: cordinates - 10,
+        behavior: 'smooth',
+    })
+    }
 
+    setTimeout(scrollToBottom, 700)
+    
 }
 
 function appendPicMarkup(pictures) {
@@ -33,4 +47,22 @@ function appendPicMarkup(pictures) {
     
 function clearMarkup() {
     refs.galeryUl.innerHTML = '';
+    refs.showMore.classList.remove('is-hidden');
 }
+
+
+document.addEventListener('click', toModal)
+
+function toModal(e) {
+    console.dir(e.target)
+    console.log(e.target.alt)
+    if (e.target.nodeName === "IMG") {
+        return basicLightbox.create(`
+    <img src="${e.target.alt}" width="800" height="600">
+`).show()
+
+        
+    
+    }
+}
+

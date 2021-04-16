@@ -4,6 +4,7 @@ export default function getRefs() {
         inputForm: document.querySelector("#search-form"),
         galeryUl: document.querySelector(".gallery"),
         showMore: document.querySelector("#show-more"),
+        image: document.querySelector(".small-pic"),
         perPage: 12,
     };
   }
