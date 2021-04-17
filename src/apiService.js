@@ -13,7 +13,7 @@ export default class ApiService {
             .then(response => response.json())
             .then(({hits}) => {
                 this.incrementPage();
-                console.log(hits)
+                
                 return hits;
             });
         

@@ -4,6 +4,8 @@ import getRefs from './refs.js'
 import cartTemplate from './galeryList.hbs';
 const refs = getRefs();
 const galleryApiService = new ApiService();
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+
 // const basicLightbox = require('basiclightbox')
 
 
@@ -26,7 +28,6 @@ function showMorePics() {
     galleryApiService.fetchOn().then(appendPicMarkup)
     
     const cordinates = refs.showMore.offsetTop;
-    console.log(cordinates)
     
     
     
@@ -55,15 +56,14 @@ import * as basicLightbox from 'basiclightbox';
 document.addEventListener('click', toModal)
 
 function toModal(e) {
-    console.dir(e.target)
-    console.log(e.target.alt)
-    if (e.target.nodeName === "IMG") {
-        return basicLightbox.create(`
-    <img src="${e.target.alt}" width="800" height="600">
-`).show()
-
-        
+    console.log(e.target.dataset.source)
     
+    if (e.target.dataset.source != null) {
+        basicLightbox.create(`<img src="${e.target.dataset.source}">`)            
+            .show();
     }
 }
+
+
+
 
