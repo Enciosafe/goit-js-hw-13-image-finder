@@ -46,6 +46,7 @@ li {
 
 .image {
   width: 400px;
+  height: 250px;
   border-radius: 20px;
   border: 1px solid;
   border-color: rgb(1, 206, 127);
@@ -60,6 +61,12 @@ li {
 
 .search-form {
   position: relative;
+}
+
+.span-text {
+  font-size: 18px;
+  font-family: "Quicksand", sans-serif;
+  color: rgb(1, 206, 127);
 }
 
 .input {

@@ -6,9 +6,10 @@ const refs = getRefs();
 const galleryApiService = new ApiService();
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
-// const basicLightbox = require('basiclightbox')
 
 
+
+///РЕНДЕР ПО ПОИСКУ
     
 refs.inputForm.addEventListener('submit', search)
 refs.showMore.addEventListener('click', showMorePics)
@@ -23,13 +24,12 @@ function search(e) {
         appendPicMarkup(pics);
     });
 }
-    
+ 
+/// РЕАЛИЗАЦИЯ КНОПКИ SHOW MORE с последующим авто-скролом на экран
 function showMorePics() {
     galleryApiService.fetchOn().then(appendPicMarkup)
     
     const cordinates = refs.showMore.offsetTop;
-    
-    
     
     function scrollToBottom() {
         window.scrollTo({
@@ -37,11 +37,27 @@ function showMorePics() {
         behavior: 'smooth',
     })
     }
-
     setTimeout(scrollToBottom, 700)
-    
-}
+    }
 
+/// Бесконечный скролл
+    const options = {
+        rootMargin: '50px',
+        threshold: 0.5,
+};
+
+    const onEntry = (entries, observer) => {
+        entries.forEach(entry => {
+            galleryApiService.fetchOn().then(appendPicMarkup)
+            checkBoxScrolling()
+  });
+};
+
+const observer = new IntersectionObserver(onEntry, options);
+
+
+
+/// рендер
 function appendPicMarkup(pictures) {
     refs.galeryUl.insertAdjacentHTML('beforeend', cartTemplate(pictures))
 };
@@ -51,12 +67,11 @@ function clearMarkup() {
     refs.showMore.classList.remove('is-hidden');
 }
 
-
+/// реализация модального окна
 import * as basicLightbox from 'basiclightbox';
 document.addEventListener('click', toModal)
 
 function toModal(e) {
-    console.log(e.target.dataset.source)
     
     if (e.target.dataset.source != null) {
         basicLightbox.create(`<img src="${e.target.dataset.source}">`)            
@@ -64,6 +79,21 @@ function toModal(e) {
     }
 }
 
+console.dir(refs.checkBox)
+
+
+/// проверка на чекбокс и активация бесконечного скролла
+function checkBoxScrolling() {
+    if (refs.checkBox.checked === true) {
+        refs.showMore.classList.add('is-hidden')
+        observer.observe(refs.showMore);
+    } else {
+        refs.showMore.classList.remove('is-hidden');
+    }
+        
+}
+
+refs.checkBox.addEventListener('change', checkBoxScrolling)
 
 
 

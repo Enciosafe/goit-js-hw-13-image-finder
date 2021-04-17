@@ -1,4 +1,6 @@
 import getRefs from './refs.js'
+import '@pnotify/core/dist/BrightTheme.css'
+const { alert, notice, info, success, error } = require('@pnotify/core');
 const refs = getRefs()
 const KEY = '21129448-e17c8b1f4b436f5a4360c1592';
 
@@ -11,9 +13,11 @@ export default class ApiService {
     fetchOn() {
          return fetch(`${refs.BASE_URL}=${this.searchQuery}&page=${this.page}&per_page=${refs.perPage}&key=${KEY}`)
             .then(response => response.json())
-            .then(({hits}) => {
+             .then(({ hits }) => {
+                 if (hits.length === 0) {
+                    alert('нет результатов!')
+                }
                 this.incrementPage();
-                
                 return hits;
             });
         

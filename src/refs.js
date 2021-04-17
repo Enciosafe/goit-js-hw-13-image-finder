@@ -5,6 +5,7 @@ export default function getRefs() {
         galeryUl: document.querySelector(".gallery"),
         showMore: document.querySelector("#show-more"),
         image: document.querySelector(".image"),
+        checkBox: document.querySelector("#checkbox"),
         perPage: 12,
     };
   }
