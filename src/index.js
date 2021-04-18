@@ -73,7 +73,7 @@ document.addEventListener('click', toModal)
 
 function toModal(e) {
     
-    if (e.target.dataset.source != null) {
+    if (e.target.dataset.source) {
         basicLightbox.create(`<img src="${e.target.dataset.source}">`)            
             .show();
     }
@@ -84,7 +84,7 @@ console.dir(refs.checkBox)
 
 /// проверка на чекбокс и активация бесконечного скролла
 function checkBoxScrolling() {
-    if (refs.checkBox.checked === true) {
+    if (refs.checkBox.checked) {
         refs.showMore.classList.add('is-hidden')
         observer.observe(refs.showMore);
     } else {

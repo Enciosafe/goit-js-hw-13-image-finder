@@ -18,8 +18,9 @@ export default class ApiService {
                     alert('нет результатов!')
                 }
                 this.incrementPage();
-                return hits;
-            });
+                 return hits;
+             })
+            .catch (error => console.log(error));
         
     }
 
